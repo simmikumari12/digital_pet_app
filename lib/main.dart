@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(MaterialApp(
     home: DigitalPetApp(),
+    debugShowCheckedModeBanner: false,
   ));
 }
 
@@ -12,7 +13,7 @@ class DigitalPetApp extends StatefulWidget {
 }
 
 class _DigitalPetAppState extends State<DigitalPetApp> {
-  String petName = "Your Pet";
+  String petName = "Kitten";
   int happinessLevel = 50;
   int hungerLevel = 50;
 
@@ -47,6 +48,15 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
       }
     });
   }
+  Color _getMoodColor() {
+    if (happinessLevel > 70) {
+      return Colors.green; // Happy
+    } else if (happinessLevel >= 30) {
+      return Colors.yellow; // Neutral
+    } else {
+      return Colors.red; // Unhappy
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,6 +82,16 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
             ElevatedButton(
               onPressed: _feedPet,
               child: Text('Feed Your Pet'),
+            ),
+            ColorFiltered(
+              colorFilter: ColorFilter.mode(
+                _getMoodColor(),
+                BlendMode.modulate, 
+              ),
+              child: Image.asset(
+                'assets/pet_image.png',
+                height: 200, 
+              ),
             ),
           ],
         ),
