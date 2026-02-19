@@ -48,6 +48,15 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
       }
     });
   }
+  String _getMoodText() {
+    if (happinessLevel > 70) {
+      return "Mood: Happy 😊";
+    } else if (happinessLevel >= 30) {
+      return "Mood: Neutral 🙂";
+    } else {
+      return "Mood: Unhappy 😢";
+    }
+  }
   Color _getMoodColor() {
     if (happinessLevel > 70) {
       return Colors.green; // Happy
@@ -91,6 +100,14 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
               child: Image.asset(
                 'assets/pet_image.png',
                 height: 200, 
+              ),
+            ),
+            SizedBox(height: 8.0), 
+            Text(
+              _getMoodText(),
+              style: TextStyle(
+                fontSize: 22.0, 
+                fontWeight: FontWeight.bold,
               ),
             ),
           ],
